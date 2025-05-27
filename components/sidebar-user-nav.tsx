@@ -1,6 +1,6 @@
 'use client';
 
-import { ChevronUp } from 'lucide-react';
+import { ChevronUp, LogOut } from 'lucide-react';
 import Image from 'next/image';
 import { useClerk, useUser } from '@clerk/nextjs';
 import { useTheme } from 'next-themes';
@@ -29,6 +29,30 @@ export function SidebarUserNav() {
   const { setTheme, theme } = useTheme();
 
   const isGuest = !user;
+
+  const handleSignOut = async () => {
+    try {
+      if (!isUserLoaded) {
+        toast({
+          type: 'error',
+          description: 'Checking authentication status, please try again!',
+        });
+        return;
+      }
+      
+      // Sign out and redirect to auth page
+      await signOut({
+        redirectUrl: '/auth'
+      });
+      // No need for manual router navigation as Clerk handles the redirect
+    } catch (error) {
+      console.error('Error signing out:', error);
+      toast({
+        type: 'error',
+        description: 'Failed to sign out. Please try again.',
+      });
+    }
+  };
 
   return (
     <SidebarMenu>

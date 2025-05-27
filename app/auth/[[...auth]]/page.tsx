@@ -44,6 +44,7 @@ export default function AuthPage() {
               path="/auth"
               signUpUrl="/auth?tab=sign-up"
               afterSignInUrl="/"
+              redirectUrl="/"
             />
           ) : (
             <SignUp 
@@ -51,6 +52,7 @@ export default function AuthPage() {
               path="/auth"
               signInUrl="/auth?tab=sign-in"
               afterSignUpUrl="/"
+              redirectUrl="/"
             />
           )}
         </div>

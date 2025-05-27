@@ -4,6 +4,7 @@ import { useUser } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
 
 import { PlusIcon } from '@/components/icons';
+import { SignOutButton } from '@/components/sign-out-button';
 import { SidebarHistory } from '@/components/sidebar-history';
 import { SidebarUserNav } from '@/components/sidebar-user-nav';
 import { Button } from '@/components/ui/button';
@@ -21,6 +22,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from './ui/tooltip';
 export function AppSidebar() {
   const router = useRouter();
   const { setOpenMobile } = useSidebar();
+  const { user, isSignedIn } = useUser();
 
   return (
     <Sidebar className="group-data-[side=left]:border-r-0">
@@ -62,6 +64,11 @@ export function AppSidebar() {
         <SidebarHistory />
       </SidebarContent>
       <SidebarFooter>
+        {user && !user.emailAddresses[0]?.emailAddress.match(/^guest-/) && (
+          <div className="px-3 py-2">
+            <SignOutButton />
+          </div>
+        )}
         <SidebarUserNav />
       </SidebarFooter>
     </Sidebar>
