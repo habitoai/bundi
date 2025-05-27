@@ -1,0 +1,14 @@
+import { SignUp } from "@clerk/nextjs";
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Bundi - Sign Up',
+};
+
+export default function SignUpPage() {
+  return (
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+      <SignUp path="/signup" routing="path" signInUrl="/signin" />
+    </div>
+  );
+}
