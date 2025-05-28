@@ -4,6 +4,7 @@ import { useUser } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
 
 import { PlusIcon } from '@/components/icons';
+import { UserIcon } from 'lucide-react';
 import { SignOutButton } from '@/components/sign-out-button';
 import { SidebarHistory } from '@/components/sidebar-history';
 import { SidebarUserNav } from '@/components/sidebar-user-nav';
@@ -65,9 +66,21 @@ export function AppSidebar() {
       </SidebarContent>
       <SidebarFooter>
         {user && !user.emailAddresses[0]?.emailAddress.match(/^guest-/) && (
-          <div className="px-3 py-2">
-            <SignOutButton />
-          </div>
+          <>
+            <div className="px-3 py-2">
+              <Link 
+                href="/profile" 
+                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground rounded-md hover:bg-muted px-2 py-1.5 w-full cursor-pointer transition-colors"
+                onClick={() => setOpenMobile(false)}
+              >
+                <UserIcon size={16} />
+                <span>Profile</span>
+              </Link>
+            </div>
+            <div className="px-3 py-2">
+              <SignOutButton />
+            </div>
+          </>
         )}
         <SidebarUserNav />
       </SidebarFooter>
